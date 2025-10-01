@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мэрия RPM | Официальный портал</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6a1b9a;
+            --primary-dark: #4a148c;
+            --primary-light: #8e24aa;
+            --secondary: #e040fb;
+            --accent: #ff4081;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 3px solid var(--secondary);
+            background: linear-gradient(45deg, var(--primary-light), var(--secondary));
+            padding: 5px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(106, 27, 154, 0.85), rgba(74, 20, 140, 0.9)), url('https://i.postimg.cc/1X8wh21t/2025-10-01-16-08-53.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L1000,0 L1000,700 Q500,800 0,700 L0,0 Z"></path></svg>');
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: var(--transition);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background-color: #e040fb;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* Governor Section */
+        .governor-section {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+
+        .governor-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="none"><path fill="rgba(106,27,154,0.03)" d="M0,100 C200,200 500,0 1000,100 L1000,1000 L0,1000 Z"></path></svg>');
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: top;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .governor-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .governor-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 8px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+            filter: grayscale(0.2);
+        }
+
+        .governor-photo:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            filter: grayscale(0);
+        }
+
+        .governor-info {
+            flex: 1;
+        }
+
+        .governor-name {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .governor-title {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .governor-bio {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Discord Section */
+        .discord-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discord-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.postimg.cc/1X8wh21t/2025-10-01-16-08-53.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .discord-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .discord-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .discord-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .discord-stats {
+            display: flex;
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .discord-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .discord-join {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .btn-discord {
+            background-color: #5865F2;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+
+        .btn-discord:hover {
+            background-color: #4752c4;
+        }
+
+        /* Ideas Section */
+        .ideas-section {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+
+        .ideas-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="none"><path fill="rgba(106,27,154,0.03)" d="M0,900 C300,800 700,1000 1000,900 L1000,1000 L0,1000 Z"></path></svg>');
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+
+        .ideas-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .disclaimer-box {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-left: 5px solid var(--secondary);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .disclaimer-box h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .idea-form {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(106, 27, 154, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--secondary);
+            background: linear-gradient(45deg, var(--primary-light), var(--secondary));
+            padding: 3px;
+        }
+
+        .footer-logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-info p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .footer-links h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .governor-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .discord-content {
+                grid-template-columns: 1fr;
+            }
+
+            .discord-features {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-dark);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .governor-photo {
+                width: 250px;
+                height: 250px;
+            }
+
+            .discord-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .idea-form {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .governor-name {
+                font-size: 2rem;
+            }
+
+            .discord-info h2 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <!-- Логотип в виде здания мэрии -->
+                <div class="logo-img">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="40" width="60" height="50" fill="white" rx="5"/>
+                        <rect x="30" y="50" width="10" height="30" fill="#6a1b9a"/>
+                        <rect x="50" y="50" width="10" height="30" fill="#6a1b9a"/>
+                        <rect x="70" y="50" width="10" height="30" fill="#6a1b9a"/>
+                        <rect x="35" y="20" width="30" height="20" fill="white" rx="3"/>
+                        <rect x="45" y="10" width="10" height="10" fill="white"/>
+                        <line x1="45" y1="10" x2="50" y2="5" stroke="white" stroke-width="2"/>
+                        <line x1="55" y1="10" x2="50" y2="5" stroke="white" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="logo-text">Мэрия RPM</div>
+            </div>
+            <nav>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-links">
+                    <a href="#home">Главная</a>
+                    <a href="#governor">Губернатор</a>
+                    <a href="#discord">Discord</a>
+                    <a href="#ideas">Предложения</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content fade-in">
+            <h1>Официальный портал мэрии RPM WEST</h1>
+            <p>Добро пожаловать на официальный сайт мэрии сервера RPM. Здесь вы найдёте всю актуальную информацию о деятельности мэрии, возможностях участия в развитии штата.</p>
+            <a href="#discord" class="btn">Присоединиться к сообществу</a>
+        </div>
+    </section>
+
+    <!-- Governor Section -->
+    <section id="governor" class="governor-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Наш губернатор</h2>
+            <div class="governor-container">
+                <img src="https://i.postimg.cc/BPNftXgg/governor.jpg" alt="Губернатор Creepy_snow" class="governor-photo fade-in">
+                <div class="governor-info fade-in delay-1">
+                    <h2 class="governor-name">Creepy_snow | Аля Рис</h2>
+                    <p class="governor-title">Губернатор мэрии RPM</p>
+                    <p class="governor-bio">Действующий губернатор RPM WEST. Под руководством Али Рис мэрия активно работает над созданием комфортной среды для всех жителей штата.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discord Section -->
+    <section id="discord" class="discord-section">
+        <div class="container discord-container">
+            <h2 class="section-title fade-in">Наше сообщество в Discord</h2>
+            <div class="discord-content">
+                <div class="discord-info fade-in">
+                    <h2>Присоединяйтесь к нашему растущему сообществу!</h2>
+                    <p>Наш Discord-сервер - это место, где собираются активные участники проекта RPM для общения, обмена идеями и участия в жизни сервера.</p>
+                    
+                    <div class="discord-stats">
+                        <div class="stat">
+                            <div class="stat-number">320+</div>
+                            <div class="stat-label">участников</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">активность</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">официально</div>
+                        </div>
+                    </div>
+                    
+                    <p>Станьте частью нашего сообщества и получите доступ к эксклюзивным возможностям!</p>
+                </div>
+                
+                <div class="discord-features fade-in delay-1">
+                    <div class="feature">
+                        <i class="fas fa-comments"></i>
+                        <h3>Общение с губернатором</h3>
+                        <p>Прямой контакт с губернатором и представителями мэрии</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-newspaper"></i>
+                        <h3>Актуальные новости</h3>
+                        <p>Своевременная информация об изменениях федеральных законов</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Мероприятия и конкурсы</h3>
+                        <p>Участвуйте в регулярных мероприятиях</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Идеи и голосования</h3>
+                        <p>Предлагайте улучшения и голосуйте за изменения</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="discord-join fade-in delay-2">
+                <a href="https://discord.gg/CHfWcJx5uQ" class="btn btn-discord" target="_blank">
+                    <i class="fab fa-discord"></i> Присоединиться к Discord
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ideas Section -->
+    <section id="ideas" class="ideas-section">
+        <div class="container ideas-container">
+            
+            <div class="idea-form fade-in delay-1">
+                <h3>Предложите свою идею</h3>
+                <p>Ваши предложения по улучшению государственных зданий и инфраструктуры сервера</p>
+                
+                <form action="https://formspree.io/f/movkdgyv" method="POST">
+                    <div class="form-group">
+                        <label for="name">Ваш никнейм в Minecraft:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="idea">Ваша идея или предложение:</label>
+                        <textarea id="idea" name="idea" class="form-control" placeholder="Опишите подробно вашу идею по улучшению государственных зданий..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn submit-btn">
+                        <i class="fas fa-paper-plane"></i> Отправить предложение
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <div class="footer-logo-img">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="40" width="60" height="50" fill="white" rx="5"/>
+                                <rect x="30" y="50" width="10" height="30" fill="#6a1b9a"/>
+                                <rect x="50" y="50" width="10" height="30" fill="#6a1b9a"/>
+                                <rect x="70" y="50" width="10" height="30" fill="#6a1b9a"/>
+                                <rect x="35" y="20" width="30" height="20" fill="white" rx="3"/>
+                                <rect x="45" y="10" width="10" height="10" fill="white"/>
+                                <line x1="45" y1="10" x2="50" y2="5" stroke="white" stroke-width="2"/>
+                                <line x1="55" y1="10" x2="50" y2="5" stroke="white" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="footer-logo-text">Мэрия RPM</div>
+                    </div>
+                    <p>Официальный портал администрации сервера RPM. Мы работаем над созданием комфортной игровой среды для всех участников.</p>
+                    <p>Губернатор: Creepy_snow | Аля Рис</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#governor">Губернатор</a></li>
+                        <li><a href="#discord">Discord</a></li>
+                        <li><a href="#ideas">Предложения</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Мэрия RPM © 2025 | Официальный сайт</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-title, .governor-photo, .governor-info, .discord-info, .discord-features, .disclaimer-box, .idea-form').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission feedback
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const submitBtn = this.querySelector('.submit-btn');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Отправлено!';
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 3000);
+                }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>
