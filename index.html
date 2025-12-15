@@ -3,147 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мэрия RPM | Официальный портал</title>
+    <title>Автосервис - Профессиональный ремонт автомобилей в Москве</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ed92ea81-8301-46d0-9e4b-cce23aadb9e1&lang=ru_RU" type="text/javascript"></script>
     <style>
-        :root {
-            --primary: #6a1b9a;
-            --primary-dark: #4a148c;
-            --primary-light: #8e24aa;
-            --secondary: #e040fb;
-            --accent: #ff4081;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --transition: all 0.3s ease;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
+        :root {
+            --primary: #e74c3c;
+            --primary-dark: #c0392b;
+            --secondary: #2c3e50;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --gray: #95a5a6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
             line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
             overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            margin-bottom: 1rem;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
         }
 
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: var(--gradient);
             color: white;
-            position: fixed;
-            width: 100%;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
         }
 
         .header-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
-        .logo-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 3px solid var(--secondary);
-            background: linear-gradient(45deg, var(--primary-light), var(--secondary));
-            padding: 5px;
+        .logo i {
+            font-size: 2rem;
+            color: white;
+            background: var(--primary);
+            padding: 10px;
+            border-radius: 50%;
         }
 
-        .logo-text {
-            font-size: 1.5rem;
+        .logo h1 {
+            font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(45deg, #fff, var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .nav-links {
+        nav ul {
             display: flex;
-            gap: 25px;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
         }
 
-        .nav-links a {
+        nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            padding: 8px 15px;
-            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
             transition: var(--transition);
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .nav-links a:hover {
-            color: var(--secondary);
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
-        .nav-links a::after {
+        nav a::after {
             content: '';
             position: absolute;
+            bottom: 0;
+            left: 50%;
             width: 0;
             height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--secondary);
+            background: white;
             transition: var(--transition);
+            transform: translateX(-50%);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        nav a.active::after {
+            width: 80%;
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
+        .nav-icon {
+            font-size: 1.2rem;
+        }
+
+        .nav-text {
+            font-size: 0.9rem;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-btn {
+            background: rgba(255, 255, 255, 0.2);
             color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .user-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .mobile-menu {
+            display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: white;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(106, 27, 154, 0.85), rgba(74, 20, 140, 0.9)), url('https://i.postimg.cc/1X8wh21t/2025-10-01-16-08-53.png');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://avatars.mds.yandex.net/get-altay/16270073/2a000001987f3e04557c6e69bc01862f4298/XXXL');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             color: white;
-            padding: 180px 0 100px;
+            padding: 6rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -154,102 +172,73 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L1000,0 L1000,700 Q500,800 0,700 L0,0 Z"></path></svg>');
-            background-size: 100% auto;
-            background-repeat: no-repeat;
-            background-position: bottom;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0.3;
+            z-index: 1;
         }
 
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 1rem;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, #fff, var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease;
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             margin-bottom: 2rem;
             opacity: 0.9;
-            font-weight: 300;
-            letter-spacing: 0.5px;
+            animation: fadeInUp 1s ease 0.2s both;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--secondary);
+            background-color: var(--primary);
             color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
             text-decoration: none;
-            border-radius: 50px;
             font-weight: 600;
             transition: var(--transition);
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: var(--transition);
-        }
-
-        .btn:hover::before {
-            left: 100%;
+            font-size: 1rem;
+            animation: fadeInUp 1s ease 0.4s both;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            background-color: #e040fb;
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
         }
 
-        .btn-primary:hover {
-            background-color: var(--primary-light);
-        }
-
-        /* Governor Section */
-        .governor-section {
-            padding: 100px 0;
+        .btn-outline:hover {
             background-color: white;
-            position: relative;
+            color: var(--dark);
         }
 
-        .governor-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="none"><path fill="rgba(106,27,154,0.03)" d="M0,100 C200,200 500,0 1000,100 L1000,1000 L0,1000 Z"></path></svg>');
-            background-size: 100% auto;
-            background-repeat: no-repeat;
-            background-position: top;
+        /* Main Content */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
         }
 
         .section-title {
@@ -258,362 +247,626 @@
             position: relative;
         }
 
-        .section-title::after {
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2:after {
             content: '';
-            display: block;
+            position: absolute;
             width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            margin: 15px auto;
-            border-radius: 2px;
+            height: 3px;
+            background: var(--gradient);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .governor-container {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
-        .governor-photo {
-            width: 300px;
-            height: 300px;
-            border-radius: 20px;
-            object-fit: cover;
-            border: 8px solid white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            transition: var(--transition);
-            filter: grayscale(0.2);
-        }
-
-        .governor-photo:hover {
-            transform: scale(1.03);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            filter: grayscale(0);
-        }
-
-        .governor-info {
-            flex: 1;
-        }
-
-        .governor-name {
-            font-size: 2.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .governor-title {
-            font-size: 1.2rem;
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .governor-bio {
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-            color: #555;
-        }
-
-        /* Discord Section */
-        .discord-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            position: relative;
+        .service-card {
+            background: white;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
         }
 
-        .discord-section::before {
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.postimg.cc/1X8wh21t/2025-10-01-16-08-53.png');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.1;
-            z-index: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
         }
 
-        .discord-container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .discord-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .discord-info h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #fff, var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .discord-stats {
-            display: flex;
-            gap: 30px;
-            margin: 2rem 0;
-        }
-
-        .stat {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: var(--transition);
-        }
-
-        .stat:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-
-        .discord-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .feature {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: var(--transition);
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .feature i {
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: 15px;
-        }
-
-        .feature h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .discord-join {
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .btn-discord {
-            background-color: #5865F2;
+        .service-icon {
+            background: var(--gradient);
             color: white;
-            padding: 15px 40px;
-            font-size: 1.1rem;
+            font-size: 2.5rem;
+            padding: 1.5rem;
+            text-align: center;
         }
 
-        .btn-discord:hover {
-            background-color: #4752c4;
+        .service-content {
+            padding: 1.5rem;
         }
 
-        /* Ideas Section */
-        .ideas-section {
-            padding: 100px 0;
-            background-color: white;
-            position: relative;
+        .service-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
         }
 
-        .ideas-section::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="none"><path fill="rgba(106,27,154,0.03)" d="M0,900 C300,800 700,1000 1000,900 L1000,1000 L0,1000 Z"></path></svg>');
-            background-size: 100% auto;
-            background-repeat: no-repeat;
-            background-position: bottom;
-        }
-
-        .ideas-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .disclaimer-box {
-            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
-            border-left: 5px solid var(--secondary);
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .disclaimer-box h3 {
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin: 0.5rem 0;
         }
 
-        .idea-form {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(106, 27, 154, 0.1);
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .product-description {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Features Section */
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-category {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .feature-category h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list li:before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Reviews Section */
+        .reviews-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .reviews-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .review-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 100px;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--secondary);
         }
 
         .form-control {
             width: 100%;
-            padding: 15px;
+            padding: 0.8rem;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 4px;
             font-size: 1rem;
             transition: var(--transition);
-            font-family: 'Montserrat', sans-serif;
         }
 
         .form-control:focus {
+            border-color: var(--accent);
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
 
         textarea.form-control {
-            min-height: 150px;
+            min-height: 120px;
             resize: vertical;
         }
 
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            width: 100%;
-            padding: 15px;
-            font-size: 1.1rem;
-            border-radius: 8px;
+        .star-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 1rem;
         }
 
-        .submit-btn:hover {
-            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: var(--warning);
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .review-card:hover {
+            transform: translateX(5px);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .review-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .review-stars {
+            color: var(--warning);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Forum Section */
+        .forum-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .forum-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .forum-posts {
+            padding: 1.5rem;
+        }
+
+        .post-form {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-card {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .post-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            background: #f8f9fa;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-author {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .post-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .post-actions {
+            padding: 0.8rem 1.5rem;
+            background: #f8f9fa;
+            display: flex;
+            gap: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .post-action {
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .post-action:hover {
+            color: var(--accent);
+        }
+
+        /* Contacts Section */
+        .contacts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            background: var(--gradient);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        #yandex-map {
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Personal Account */
+        .account-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .account-header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .account-content {
+            padding: 2rem;
+        }
+
+        .user-info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
         }
 
         /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            background: var(--secondary);
             color: white;
-            padding: 60px 0 30px;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
         }
 
-        .footer-content {
+        .footer-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
         }
 
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
         }
 
-        .footer-logo-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 2px solid var(--secondary);
-            background: linear-gradient(45deg, var(--primary-light), var(--secondary));
-            padding: 3px;
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
         }
 
-        .footer-logo-text {
-            font-size: 1.3rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #fff, var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .footer-info p {
-            margin-bottom: 15px;
-            opacity: 0.8;
-        }
-
-        .footer-links h3 {
-            color: var(--secondary);
-            margin-bottom: 20px;
-        }
-
-        .footer-links ul {
+        .footer-col ul {
             list-style: none;
         }
 
-        .footer-links li {
-            margin-bottom: 10px;
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
         }
 
-        .footer-links a {
-            color: white;
+        .footer-col ul li a {
+            color: #ddd;
             text-decoration: none;
-            opacity: 0.8;
             transition: var(--transition);
         }
 
-        .footer-links a:hover {
-            opacity: 1;
-            color: var(--secondary);
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
         }
 
-        .footer-bottom {
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 2rem;
+            margin-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .auth-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .auth-tab.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
         }
 
         /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -625,340 +878,1148 @@
             }
         }
 
-        .fade-in {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .delay-1 {
-            animation-delay: 0.2s;
-        }
-
-        .delay-2 {
-            animation-delay: 0.4s;
-        }
-
-        .delay-3 {
-            animation-delay: 0.6s;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .governor-container {
-                flex-direction: column;
-                text-align: center;
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav ul {
+                gap: 1rem;
             }
-
-            .discord-content {
-                grid-template-columns: 1fr;
+            
+            .nav-text {
+                display: none;
             }
-
-            .discord-features {
-                grid-template-columns: 1fr;
+            
+            nav a {
+                padding: 0.5rem;
             }
-
-            .footer-content {
-                grid-template-columns: 1fr;
+            
+            .user-btn .btn-text {
+                display: none;
+            }
+            
+            .user-btn {
+                padding: 0.5rem;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
+            .header-container {
+                flex-wrap: wrap;
+            }
+
+            nav {
+                order: 3;
                 width: 100%;
-                background-color: var(--primary-dark);
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                margin-top: 1rem;
+                display: none;
             }
 
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
+            nav.show {
                 display: block;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .governor-photo {
-                width: 250px;
-                height: 250px;
-            }
-
-            .discord-stats {
+            nav ul {
                 flex-direction: column;
-                gap: 15px;
+                text-align: center;
+                gap: 0.5rem;
+                width: 100%;
             }
 
-            .idea-form {
-                padding: 25px;
+            .user-actions {
+                margin-left: auto;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            
+            .nav-text {
+                display: inline;
+            }
+            
+            nav a {
+                justify-content: center;
             }
         }
 
-        @media (max-width: 576px) {
-            .hero {
-                padding: 150px 0 80px;
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.5rem;
             }
+            
+            .user-actions {
+                gap: 0.5rem;
+            }
+            
+            .user-btn {
+                padding: 0.5rem;
+            }
+        }
 
-            .hero h1 {
-                font-size: 2rem;
-            }
+        /* Hidden elements */
+        .hidden {
+            display: none !important;
+        }
 
-            .governor-name {
-                font-size: 2rem;
-            }
+        /* Accessibility badge */
+        .accessibility-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #27ae60;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
 
-            .discord-info h2 {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
+        /* Year badge */
+        .year-badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Account icon special styling */
+        #accountNav .nav-icon {
+            font-size: 1.4rem;
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="container header-container">
+        <div class="header-container">
             <div class="logo">
-                <!-- Логотип в виде здания мэрии -->
-                <div class="logo-img">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="20" y="40" width="60" height="50" fill="white" rx="5"/>
-                        <rect x="30" y="50" width="10" height="30" fill="#6a1b9a"/>
-                        <rect x="50" y="50" width="10" height="30" fill="#6a1b9a"/>
-                        <rect x="70" y="50" width="10" height="30" fill="#6a1b9a"/>
-                        <rect x="35" y="20" width="30" height="20" fill="white" rx="3"/>
-                        <rect x="45" y="10" width="10" height="10" fill="white"/>
-                        <line x1="45" y1="10" x2="50" y2="5" stroke="white" stroke-width="2"/>
-                        <line x1="55" y1="10" x2="50" y2="5" stroke="white" stroke-width="2"/>
-                    </svg>
-                </div>
-                <div class="logo-text">Мэрия RPM</div>
+                <i class="fas fa-car"></i>
+                <h1>Автосервис</h1>
             </div>
-            <nav>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="nav-links">
-                    <a href="#home">Главная</a>
-                    <a href="#governor">Губернатор</a>
-                    <a href="#discord">Discord</a>
-                    <a href="#ideas">Предложения</a>
-                </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-section="home">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span class="nav-text">Главная</span>
+                    </a></li>
+                    <li><a href="#" class="nav-link" data-section="services">
+                        <i class="fas fa-tools nav-icon"></i>
+                        <span class="nav-text">Услуги</span>
+                    </a></li>
+                    <li><a href="#" class="nav-link" data-section="products">
+                        <i class="fas fa-shopping-cart nav-icon"></i>
+                        <span class="nav-text">Товары</span>
+                    </a></li>
+                    <li><a href="#" class="nav-link" data-section="features">
+                        <i class="fas fa-star nav-icon"></i>
+                        <span class="nav-text">Особенности</span>
+                    </a></li>
+                    <li><a href="#" class="nav-link" data-section="reviews">
+                        <i class="fas fa-comment-alt nav-icon"></i>
+                        <span class="nav-text">Отзывы</span>
+                    </a></li>
+                    <li><a href="#" class="nav-link" data-section="forum">
+                        <i class="fas fa-users nav-icon"></i>
+                        <span class="nav-text">Форум</span>
+                    </a></li>
+                    <li><a href="#" class="nav-link" data-section="contacts">
+                        <i class="fas fa-address-book nav-icon"></i>
+                        <span class="nav-text">Контакты</span>
+                    </a></li>
+                    <li><a href="#" class="nav-link hidden" id="accountNav" data-section="account">
+                        <i class="fas fa-user nav-icon"></i>
+                        <span class="nav-text">Кабинет</span>
+                    </a></li>
+                </ul>
             </nav>
+            <div class="user-actions">
+                <button class="user-btn" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span class="btn-text">Войти</span>
+                </button>
+                <button class="user-btn" id="registerBtn">
+                    <i class="fas fa-user-plus"></i>
+                    <span class="btn-text">Регистрация</span>
+                </button>
+                <button class="user-btn hidden" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="btn-text">Выйти</span>
+                </button>
+            </div>
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </header>
 
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-tab="login">Вход</div>
+                <div class="auth-tab" data-tab="register">Регистрация</div>
+            </div>
+            
+            <form class="auth-form active" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Пароль</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Войти</button>
+            </form>
+            
+            <form class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="regName">Имя</label>
+                    <input type="text" id="regName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPhone">Телефон</label>
+                    <input type="tel" id="regPhone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Пароль</label>
+                    <input type="password" id="regPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container hero-content fade-in">
-            <h1>Официальный портал мэрии RPM WEST</h1>
-            <p>Добро пожаловать на официальный сайт мэрии сервера RPM. Здесь вы найдёте всю актуальную информацию о деятельности мэрии, возможностях участия в развитии штата.</p>
-            <a href="#discord" class="btn">Присоединиться к сообществу</a>
+    <section id="home" class="page-section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h2>Профессиональный ремонт вашего автомобиля</h2>
+                <p>Полный спектр услуг по ремонту и обслуживанию автомобилей любой сложности. Работаем с 2025 года!</p>
+                <a href="#" class="btn nav-link" data-section="services">Наши услуги</a>
+                <a href="#" class="btn btn-outline nav-link" data-section="contacts">Связаться с нами</a>
+            </div>
         </div>
-    </section>
 
-    <!-- Governor Section -->
-    <section id="governor" class="governor-section">
         <div class="container">
-            <h2 class="section-title fade-in">Наш губернатор</h2>
-            <div class="governor-container">
-                <img src="https://i.postimg.cc/BPNftXgg/governor.jpg" alt="Губернатор Creepy_snow" class="governor-photo fade-in">
-                <div class="governor-info fade-in delay-1">
-                    <h2 class="governor-name">Creepy_snow | Аля Рис</h2>
-                    <p class="governor-title">Губернатор мэрии RPM</p>
-                    <p class="governor-bio">Действующий губернатор RPM WEST. Под руководством Али Рис мэрия активно работает над созданием комфортной среды для всех жителей штата.</p>
+            <div class="section-title">
+                <h2>Почему выбирают нас</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Опытные мастера</h3>
+                        <p>Наши специалисты имеют многолетний опыт работы с автомобилями различных марок и моделей.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Современное оборудование</h3>
+                        <p>Используем только профессиональное оборудование и качественные запчасти.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Быстрое выполнение работ</h3>
+                        <p>Большинство ремонтов выполняем в течение одного дня с гарантией качества.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Discord Section -->
-    <section id="discord" class="discord-section">
-        <div class="container discord-container">
-            <h2 class="section-title fade-in">Наше сообщество в Discord</h2>
-            <div class="discord-content">
-                <div class="discord-info fade-in">
-                    <h2>Присоединяйтесь к нашему растущему сообществу!</h2>
-                    <p>Наш Discord-сервер - это место, где собираются активные участники проекта RPM для общения, обмена идеями и участия в жизни сервера.</p>
-                    
-                    <div class="discord-stats">
-                        <div class="stat">
-                            <div class="stat-number">320+</div>
-                            <div class="stat-label">участников</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">активность</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">официально</div>
-                        </div>
-                    </div>
-                    
-                    <p>Станьте частью нашего сообщества и получите доступ к эксклюзивным возможностям!</p>
-                </div>
-                
-                <div class="discord-features fade-in delay-1">
-                    <div class="feature">
-                        <i class="fas fa-comments"></i>
-                        <h3>Общение с губернатором</h3>
-                        <p>Прямой контакт с губернатором и представителями мэрии</p>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-newspaper"></i>
-                        <h3>Актуальные новости</h3>
-                        <p>Своевременная информация об изменениях федеральных законов</p>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-trophy"></i>
-                        <h3>Мероприятия и конкурсы</h3>
-                        <p>Участвуйте в регулярных мероприятиях</p>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-lightbulb"></i>
-                        <h3>Идеи и голосования</h3>
-                        <p>Предлагайте улучшения и голосуйте за изменения</p>
-                    </div>
-                </div>
+    <!-- Services Section -->
+    <section id="services" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
             </div>
             
-            <div class="discord-join fade-in delay-2">
-                <a href="https://discord.gg/CHfWcJx5uQ" class="btn btn-discord" target="_blank">
-                    <i class="fab fa-discord"></i> Присоединиться к Discord
-                </a>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-car-crash"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Ремонт двигателя</h3>
+                        <p>Диагностика и ремонт любой сложности, включая капитальный ремонт двигателя.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-car-side"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Ремонт ходовой части</h3>
+                        <p>Замена амортизаторов, сайлентблоков, шаровых опор и других элементов подвески.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Ремонт КПП</h3>
+                        <p>Ремонт АКПП, РКПП, DSG и других типов коробок передач.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Автоэлектрика</h3>
+                        <p>Диагностика и ремонт электронных систем автомобиля.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Топливная система</h3>
+                        <p>Ремонт форсунок, чистка инжектора, промывка топливной системы.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Сварочные работы</h3>
+                        <p>Качественные сварочные работы любой сложности.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Ideas Section -->
-    <section id="ideas" class="ideas-section">
-        <div class="container ideas-container">
+    <!-- Products Section -->
+    <section id="products" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши товары и услуги</h2>
+            </div>
             
-            <div class="idea-form fade-in delay-1">
-                <h3>Предложите свою идею</h3>
-                <p>Ваши предложения по улучшению государственных зданий и инфраструктуры сервера</p>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-title">Диагностика ходовой части</div>
+                        <div class="product-price">500 ₽</div>
+                    </div>
+                    <div class="product-description">
+                        Производим диагностику ходовой части качественным оборудованием
+                    </div>
+                    <div class="accessibility-badge">
+                        <i class="fas fa-wheelchair"></i>
+                        Доступно для маломобильных групп
+                    </div>
+                </div>
                 
-                <form action="https://formspree.io/f/movkdgyv" method="POST">
-                    <div class="form-group">
-                        <label for="name">Ваш никнейм в Minecraft:</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-title">Компьютерная диагностика</div>
+                        <div class="product-price">500 ₽</div>
+                    </div>
+                    <div class="product-description">
+                        Производим компьютерную диагностику качественным оборудованием
+                    </div>
+                    <div class="accessibility-badge">
+                        <i class="fas fa-wheelchair"></i>
+                        Доступно для маломобильных групп
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-title">Замена масла (ТО базовый)</div>
+                        <div class="product-price">1000 ₽</div>
+                    </div>
+                    <div class="product-description">
+                        Производим быструю и качественную замену масла, как нашими запчастями так и с вашими
+                    </div>
+                    <div class="accessibility-badge">
+                        <i class="fas fa-wheelchair"></i>
+                        Доступно для маломобильных групп
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title" style="margin-top: 4rem;">
+                <h2>Дополнительные услуги</h2>
+            </div>
+            
+            <div class="features-container">
+                <div class="feature-category">
+                    <h3>Базовое сервисное обслуживание</h3>
+                    <ul class="feature-list">
+                        <li>Замена масла</li>
+                        <li>Компьютерная диагностика</li>
+                        <li>Диагностика ходовой части</li>
+                        <li>Полное сервисное обслуживание</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-category">
+                    <h3>Продвинутое обслуживание</h3>
+                    <ul class="feature-list">
+                        <li>Ремонт DSG</li>
+                        <li>Ремонт сцепления</li>
+                        <li>Ремонт РКПП</li>
+                        <li>Ремонт АКПП</li>
+                        <li>Ремонт ГБЦ</li>
+                        <li>Ремонт двигателя</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-category">
+                    <h3>Доступность</h3>
+                    <ul class="feature-list">
+                        <li>Парковка для людей с инвалидностью</li>
+                        <li>Доступность входа на инвалидной коляске</li>
+                        <li>Можно с собакой</li>
+                        <li>Wi-Fi для клиентов</li>
+                        <li>Туалет</li>
+                        <li>Парковка</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Особенности нашего сервиса</h2>
+            </div>
+            
+            <div class="features-container">
+                <div class="feature-category">
+                    <h3>Виды работ</h3>
+                    <ul class="feature-list">
+                        <li>Ремонт сцепления</li>
+                        <li>Ремонт РКПП</li>
+                        <li>Промывка инжектора</li>
+                        <li>Заправка и ремонт автокондиционера</li>
+                        <li>Запчасти и комплектующие под заказ</li>
+                        <li>Ремонт ГБЦ</li>
+                        <li>Ремонт ходовой части</li>
+                        <li>Ремонт форсунок</li>
+                        <li>Ремонт генераторов</li>
+                        <li>Полное сервисное обслуживание</li>
+                        <li>Ремонт автоэлектрики</li>
+                        <li>Ремонт катализаторов</li>
+                        <li>Замена ГРМ</li>
+                        <li>Замена масла</li>
+                        <li>Компьютерная диагностика автомобиля</li>
+                        <li>Восстановление рычагов</li>
+                        <li>Ремонт стартеров</li>
+                        <li>Ремонт КПП</li>
+                        <li>Раскоксовка</li>
+                        <li>Эндоскопия двигателя</li>
+                        <li>Ремонт двигателя</li>
+                        <li>Установка парктроника</li>
+                        <li>Ремонт АКПП</li>
+                        <li>Ремонт топливной системы</li>
+                        <li>Удаление катализаторов</li>
+                        <li>Ремонт тормозной системы</li>
+                        <li>Ремонт выхлопной системы</li>
+                        <li>Чистка форсунок</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-category">
+                    <h3>Марки автомобилей</h3>
+                    <ul class="feature-list">
+                        <li>Корейские</li>
+                        <li>Отечественные</li>
+                        <li>Европейские</li>
+                        <li>Японские</li>
+                        <li>Импортные</li>
+                        <li>Легковые</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-category">
+                    <h3>Условия обслуживания</h3>
+                    <ul class="feature-list">
+                        <li>Посещение с животными разрешено</li>
+                        <li>Предварительная запись</li>
+                        <li>Выездная диагностика автомобиля</li>
+                        <li>Гарантия на работы</li>
+                        <li>Официальный автосервис</li>
+                        <li>Нормочас: 100–500 ₽</li>
+                        <li>Замена масла в легковых авто</li>
+                        <li>Кешбэк до 2%</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-category">
+                    <h3>Способы оплаты</h3>
+                    <ul class="feature-list">
+                        <li>Наличными</li>
+                        <li>Банковским переводом</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Отзывы клиентов</h2>
+            </div>
+            
+            <div class="reviews-container">
+                <div class="review-form">
+                    <h3>Оставить отзыв</h3>
+                    <form id="reviewForm">
+                        <div class="form-group">
+                            <label for="reviewName">Ваше имя</label>
+                            <input type="text" id="reviewName" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Оценка</label>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5">
+                                <label for="star5"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1"><i class="fas fa-star"></i></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reviewText">Текст отзыва</label>
+                            <textarea id="reviewText" class="form-control" required placeholder="Расскажите о вашем опыте, включая доступность сервиса..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Отправить отзыв</button>
+                    </form>
+                </div>
+                
+                <div class="reviews-list" id="reviewsList">
+                    <!-- Reviews will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forum Section -->
+    <section id="forum" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Форум автолюбителей</h2>
+            </div>
+            
+            <div class="forum-container">
+                <div class="forum-header">
+                    <h3>Обсуждения</h3>
+                    <button class="btn" id="newPostBtn">Новая тема</button>
+                </div>
+                
+                <div class="post-form" id="postForm" style="display: none;">
+                    <h3>Создать новую тему</h3>
+                    <form id="createPostForm">
+                        <div class="form-group">
+                            <label for="postTitle">Заголовок</label>
+                            <input type="text" id="postTitle" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="postAuthor">Ваше имя</label>
+                            <input type="text" id="postAuthor" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="postContent">Содержание</label>
+                            <textarea id="postContent" class="form-control" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Опубликовать</button>
+                        <button type="button" class="btn" style="background: var(--gray);" id="cancelPostBtn">Отмена</button>
+                    </form>
+                </div>
+                
+                <div class="forum-posts" id="forumPosts">
+                    <!-- Forum posts will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section id="contacts" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши контакты</h2>
+            </div>
+            
+            <div class="contacts-container">
+                <div class="contact-info">
+                    <h3>Контактная информация</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Адрес</h4>
+                            <p>Салтыковская улица, 8с12, Москва, 111673</p>
+                        </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="idea">Ваша идея или предложение:</label>
-                        <textarea id="idea" name="idea" class="form-control" placeholder="Опишите подробно вашу идею по улучшению государственных зданий..." required></textarea>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Телефон</h4>
+                            <p>+7 (953) 417-31-14</p>
+                        </div>
                     </div>
                     
-                    <button type="submit" class="btn submit-btn">
-                        <i class="fas fa-paper-plane"></i> Отправить предложение
-                    </button>
-                </form>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-vk"></i>
+                        </div>
+                        <div>
+                            <h4>ВКонтакте</h4>
+                            <p><a href="https://vk.com/club231995177" style="color: var(--accent);">vk.com/club231995177</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Режим работы</h4>
+                            <p>Пн-Пт: с 9:00 до 18:00</p>
+                            <p>Сб: с 10:00 до 16:00</p>
+                            <p>Вс: выходной</p>
+                        </div>
+                    </div>
+
+                    <div class="accessibility-badge" style="margin-top: 1rem;">
+                        <i class="fas fa-wheelchair"></i>
+                        Полная доступность для маломобильных групп
+                    </div>
+                </div>
+                
+                <div class="map-container">
+                    <h3>Схема проезда</h3>
+                    <div id="yandex-map"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Account Section -->
+    <section id="account" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Личный кабинет</h2>
+            </div>
+            
+            <div class="account-container">
+                <div class="account-header">
+                    <h3>Добро пожаловать!</h3>
+                    <p>Ваши персональные данные</p>
+                </div>
+                
+                <div class="account-content">
+                    <div class="user-info-card">
+                        <h3>Персональные данные</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span>Имя:</span>
+                                <span id="userName">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span>Email:</span>
+                                <span id="userEmail">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span>Телефон:</span>
+                                <span id="userPhone">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span>Дата регистрации:</span>
+                                <span id="userRegDate">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <div class="footer-logo">
-                        <div class="footer-logo-img">
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="20" y="40" width="60" height="50" fill="white" rx="5"/>
-                                <rect x="30" y="50" width="10" height="30" fill="#6a1b9a"/>
-                                <rect x="50" y="50" width="10" height="30" fill="#6a1b9a"/>
-                                <rect x="70" y="50" width="10" height="30" fill="#6a1b9a"/>
-                                <rect x="35" y="20" width="30" height="20" fill="white" rx="3"/>
-                                <rect x="45" y="10" width="10" height="10" fill="white"/>
-                                <line x1="45" y1="10" x2="50" y2="5" stroke="white" stroke-width="2"/>
-                                <line x1="55" y1="10" x2="50" y2="5" stroke="white" stroke-width="2"/>
-                            </svg>
-                        </div>
-                        <div class="footer-logo-text">Мэрия RPM</div>
-                    </div>
-                    <p>Официальный портал администрации сервера RPM. Мы работаем над созданием комфортной игровой среды для всех участников.</p>
-                    <p>Губернатор: Creepy_snow | Аля Рис</p>
-                </div>
-                
-                <div class="footer-links">
-                    <h3>Быстрые ссылки</h3>
-                    <ul>
-                        <li><a href="#home">Главная</a></li>
-                        <li><a href="#governor">Губернатор</a></li>
-                        <li><a href="#discord">Discord</a></li>
-                        <li><a href="#ideas">Предложения</a></li>
-                    </ul>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Автосервис <span class="year-badge">С 2025 года</span></h3>
+                <p>Профессиональный ремонт и обслуживание автомобилей в Москве. Мы работаем с 2025 года и заслужили доверие клиентов.</p>
+                <div class="social-links">
+                    <a href="https://vk.com/club231995177"><i class="fab fa-vk"></i></a>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>Мэрия RPM © 2025 | Официальный сайт</p>
+            <div class="footer-col">
+                <h3>Наши услуги</h3>
+                <ul>
+                    <li><a href="#">Диагностика ходовой</a></li>
+                    <li><a href="#">Компьютерная диагностика</a></li>
+                    <li><a href="#">Замена масла</a></li>
+                    <li><a href="#">Ремонт двигателя</a></li>
+                    <li><a href="#">Ремонт КПП</a></li>
+                </ul>
             </div>
+            
+            <div class="footer-col">
+                <h3>Полезные ссылки</h3>
+                <ul>
+                    <li><a href="#" class="nav-link" data-section="home">Главная</a></li>
+                    <li><a href="#" class="nav-link" data-section="services">Услуги</a></li>
+                    <li><a href="#" class="nav-link" data-section="products">Товары</a></li>
+                    <li><a href="#" class="nav-link" data-section="features">Особенности</a></li>
+                    <li><a href="#" class="nav-link" data-section="contacts">Контакты</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Контакты</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Салтыковская ул., 8с12, Москва</li>
+                    <li><i class="fas fa-phone"></i> +7 (953) 417-31-14</li>
+                    <li><i class="fab fa-vk"></i> vk.com/club231995177</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2024-2025 Автосервис. Все права защищены.</p>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
+        // Initialize Yandex Map with correct coordinates
+        ymaps.ready(init);
+
+        function init() {
+            const map = new ymaps.Map('yandex-map', {
+                center: [55.728344, 37.870413],
+                zoom: 16
+            });
+
+            const placemark = new ymaps.Placemark([55.728344, 37.870413], {
+                hintContent: 'Автосервис',
+                balloonContent: 'Салтыковская улица, 8с12, Москва, 111673<br>Телефон: +7 (953) 417-31-14<br>VK: vk.com/club231995177'
+            }, {
+                preset: 'islands#redIcon'
+            });
+
+            map.geoObjects.add(placemark);
+        }
+
+        // Mobile menu functionality
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenu.addEventListener('click', function() {
+            mainNav.classList.toggle('show');
         });
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.querySelector('.nav-links').classList.remove('active');
+        // User management
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+
+        // Update UI based on authentication status
+        function updateAuthUI() {
+            const accountNav = document.getElementById('accountNav');
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (currentUser) {
+                // User is logged in
+                accountNav.classList.remove('hidden');
+                loginBtn.classList.add('hidden');
+                registerBtn.classList.add('hidden');
+                logoutBtn.classList.remove('hidden');
+                
+                // Update user info in account section
+                document.getElementById('userName').textContent = currentUser.name;
+                document.getElementById('userEmail').textContent = currentUser.email;
+                document.getElementById('userPhone').textContent = currentUser.phone;
+                document.getElementById('userRegDate').textContent = new Date(currentUser.registrationDate).toLocaleDateString('ru-RU');
+            } else {
+                // User is not logged in
+                accountNav.classList.add('hidden');
+                loginBtn.classList.remove('hidden');
+                registerBtn.classList.remove('hidden');
+                logoutBtn.classList.add('hidden');
+            }
+        }
+
+        // Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Show selected section
+                const sectionId = this.getAttribute('data-section');
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.add('active');
+                
+                // Close mobile menu if open
+                mainNav.classList.remove('show');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
             });
         });
 
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // Auth Modal
+        const authModal = document.getElementById('authModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const closeModal = document.getElementById('closeModal');
+        const authTabs = document.querySelectorAll('.auth-tab');
+        const authForms = document.querySelectorAll('.auth-form');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.section-title, .governor-photo, .governor-info, .discord-info, .discord-features, .disclaimer-box, .idea-form').forEach(el => {
-            observer.observe(el);
+        loginBtn.addEventListener('click', () => {
+            authModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
         });
 
-        // Form submission feedback
-        const form = document.querySelector('form');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                const submitBtn = this.querySelector('.submit-btn');
-                const originalText = submitBtn.innerHTML;
+        registerBtn.addEventListener('click', () => {
+            authModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateAuthUI();
+            alert('Вы успешно вышли из системы!');
+            
+            // Redirect to home if on account page
+            if (document.getElementById('account').classList.contains('active')) {
+                document.querySelectorAll('.nav-link').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelector('[data-section="home"]').classList.add('active');
                 
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
-                submitBtn.disabled = true;
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('home').classList.add('active');
+            }
+        });
+
+        closeModal.addEventListener('click', () => {
+            authModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        authModal.addEventListener('click', (e) => {
+            if (e.target === authModal) {
+                authModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Auth Tabs
+        authTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.getAttribute('data-tab');
                 
-                setTimeout(() => {
-                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Отправлено!';
-                    setTimeout(() => {
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }, 3000);
-                }, 1500);
+                authTabs.forEach(t => t.classList.remove('active'));
+                authForms.forEach(f => f.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tabName + 'Form').classList.add('active');
+            });
+        });
+
+        // Auth Forms
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simple login logic (in real app, this would be server-side)
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                updateAuthUI();
+                authModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                alert('Вход выполнен успешно!');
+            } else {
+                alert('Неверный email или пароль!');
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const phone = document.getElementById('regPhone').value;
+            const password = document.getElementById('regPassword').value;
+            
+            // Check if user already exists
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            if (users.find(u => u.email === email)) {
+                alert('Пользователь с таким email уже существует!');
+                return;
+            }
+            
+            // Create new user
+            const newUser = {
+                name,
+                email,
+                phone,
+                password,
+                registrationDate: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            // Auto-login after registration
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            updateAuthUI();
+            authModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            alert('Регистрация выполнена успешно!');
+        });
+
+        // Reviews functionality
+        const reviewForm = document.getElementById('reviewForm');
+        const reviewsList = document.getElementById('reviewsList');
+
+        // Load reviews from localStorage
+        function loadReviews() {
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            reviewsList.innerHTML = '';
+            
+            if (reviews.length === 0) {
+                reviewsList.innerHTML = '<p>Пока нет отзывов. Будьте первым!</p>';
+                return;
+            }
+            
+            // Sort reviews by date (newest first)
+            reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            reviews.forEach(review => {
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card';
+                
+                const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                
+                reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <div class="review-author">${review.name}</div>
+                        <div class="review-date">${new Date(review.date).toLocaleDateString('ru-RU')}</div>
+                    </div>
+                    <div class="review-stars">${stars}</div>
+                    <p>${review.text}</p>
+                `;
+                
+                reviewsList.appendChild(reviewCard);
             });
         }
+
+        // Handle review form submission
+        reviewForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('reviewName').value;
+            const rating = document.querySelector('input[name="rating"]:checked');
+            const text = document.getElementById('reviewText').value;
+            
+            if (!rating) {
+                alert('Пожалуйста, выберите оценку');
+                return;
+            }
+            
+            const review = {
+                name,
+                rating: parseInt(rating.value),
+                text,
+                date: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            reviews.push(review);
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+            
+            // Reload reviews
+            loadReviews();
+            
+            // Reset form
+            reviewForm.reset();
+            
+            alert('Спасибо за ваш отзыв!');
+        });
+
+        // Forum functionality
+        const newPostBtn = document.getElementById('newPostBtn');
+        const postForm = document.getElementById('postForm');
+        const cancelPostBtn = document.getElementById('cancelPostBtn');
+        const createPostForm = document.getElementById('createPostForm');
+        const forumPosts = document.getElementById('forumPosts');
+
+        // Toggle post form
+        newPostBtn.addEventListener('click', function() {
+            postForm.style.display = postForm.style.display === 'none' ? 'block' : 'none';
+        });
+
+        cancelPostBtn.addEventListener('click', function() {
+            postForm.style.display = 'none';
+            createPostForm.reset();
+        });
+
+        // Load posts from localStorage
+        function loadPosts() {
+            const posts = JSON.parse(localStorage.getItem('forumPosts')) || [];
+            forumPosts.innerHTML = '';
+            
+            if (posts.length === 0) {
+                forumPosts.innerHTML = '<p>Пока нет обсуждений. Создайте первую тему!</p>';
+                return;
+            }
+            
+            // Sort posts by date (newest first)
+            posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            posts.forEach(post => {
+                const postCard = document.createElement('div');
+                postCard.className = 'post-card';
+                
+                postCard.innerHTML = `
+                    <div class="post-header">
+                        <div class="post-author">${post.author}</div>
+                        <div class="post-date">${new Date(post.date).toLocaleDateString('ru-RU')}</div>
+                    </div>
+                    <div class="post-content">
+                        <h4 class="post-title">${post.title}</h4>
+                        <p>${post.content}</p>
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-action"><i class="far fa-thumbs-up"></i> Нравится</div>
+                        <div class="post-action"><i class="far fa-comment"></i> Комментировать</div>
+                        <div class="post-action"><i class="far fa-share-square"></i> Поделиться</div>
+                    </div>
+                `;
+                
+                forumPosts.appendChild(postCard);
+            });
+        }
+
+        // Handle post creation
+        createPostForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('postTitle').value;
+            const author = document.getElementById('postAuthor').value;
+            const content = document.getElementById('postContent').value;
+            
+            const post = {
+                title,
+                author,
+                content,
+                date: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            const posts = JSON.parse(localStorage.getItem('forumPosts')) || [];
+            posts.push(post);
+            localStorage.setItem('forumPosts', JSON.stringify(posts));
+            
+            // Reload posts
+            loadPosts();
+            
+            // Reset and hide form
+            createPostForm.reset();
+            postForm.style.display = 'none';
+            
+            alert('Тема успешно создана!');
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadReviews();
+            loadPosts();
+            updateAuthUI();
+        });
     </script>
 </body>
-</html>
+    </html>
